@@ -17,7 +17,10 @@ import {
   Award,
   Users,
   Brain,
-  CheckCircle
+  CheckCircle,
+  DollarSign, // New icon
+  Bot, // New icon
+  Book // New icon
 } from 'lucide-react';
 import './App.css';
 
@@ -81,6 +84,59 @@ function App() {
       icon: <TrendingUp className="w-6 h-6 text-green-500" />,
       title: "Redução de Churn",
       description: "5 pontos percentuais de redução na Infoglobo"
+    }
+  ];
+
+  const cases = [
+    {
+      icon: <Award className="w-8 h-8 text-yellow-500" />,
+      title: "Hub de Saúde Proteste",
+      description: "Criação e gestão do hub de conteúdo que alcançou 11 milhões de visualizações mensais",
+      metrics: [
+        { value: "11M", label: "Visualizações/mês", color: "blue" },
+        { value: "2024", label: "Brand Publisher Awards", color: "purple" }
+      ],
+      badge: { text: "Premiado", color: "yellow" }
+    },
+    {
+      icon: <Brain className="w-8 h-8 text-purple-500" />,
+      title: "Assistente Virtual com IA",
+      description: "Primeiro assistente virtual para direitos do consumidor no terceiro setor brasileiro",
+      metrics: [
+        { value: "50K+", label: "Usuários ativos", color: "green" },
+        { value: "24/7", label: "Atendimento IA", color: "blue" }
+      ],
+      badge: { text: "Inovação", color: "purple" }
+    },
+    {
+      icon: <DollarSign className="w-8 h-8 text-green-500" />,
+      title: "Plataforma Dívida Zero",
+      description: "Plataforma orientada a ajudar consumidores com dívidas e nome negativado a replanejarem a vida financeira.",
+      metrics: [
+        { value: "Replanejamento", label: "Financeiro", color: "green" },
+        { value: "Milhares", label: "de Usuários", color: "blue" }
+      ],
+      badge: { text: "Impacto Social", color: "green" }
+    },
+    {
+      icon: <Bot className="w-8 h-8 text-blue-500" />,
+      title: "Biblioteca de Agentes IA",
+      description: "A maior biblioteca de agentes IA da internet orientada a ajudar os consumidores em tarefas do dia a dia.",
+      metrics: [
+        { value: "+100", label: "Agentes IA", color: "blue" },
+        { value: "Soluções", label: "Diárias", color: "purple" }
+      ],
+      badge: { text: "Inovação", color: "blue" }
+    },
+    {
+      icon: <Book className="w-8 h-8 text-orange-500" />,
+      title: "MinhaHistorinha.com",
+      description: "Serviço de criação de historinhas infantis personalizadas.",
+      metrics: [
+        { value: "Histórias", label: "Criadas", color: "orange" },
+        { value: "Crianças", label: "Felizes", color: "red" }
+      ],
+      badge: { text: "Criatividade", color: "orange" }
     }
   ];
 
@@ -236,55 +292,31 @@ function App() {
               Projetos que geraram impacto real e crescimento sustentável para nossos clientes
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-8 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
-              <CardHeader>
-                <div className="flex items-center space-x-3 mb-4">
-                  <Award className="w-8 h-8 text-yellow-500" />
-                  <Badge className="bg-yellow-100 text-yellow-800">Premiado</Badge>
-                </div>
-                <CardTitle className="text-2xl text-slate-800">Hub de Saúde Proteste</CardTitle>
-                <CardDescription className="text-lg text-slate-600">
-                  Criação e gestão do hub de conteúdo que alcançou 11 milhões de visualizações mensais
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">11M</div>
-                    <div className="text-sm text-slate-600">Visualizações/mês</div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {cases.map((caseItem, index) => (
+              <Card key={index} className="p-8 bg-gradient-to-br from-blue-50 to-purple-50 border-0">
+                <CardHeader>
+                  <div className="flex items-center space-x-3 mb-4">
+                    {caseItem.icon}
+                    <Badge className={`bg-${caseItem.badge.color}-100 text-${caseItem.badge.color}-800`}>{caseItem.badge.text}</Badge>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">2024</div>
-                    <div className="text-sm text-slate-600">Brand Publisher Awards</div>
+                  <CardTitle className="text-2xl text-slate-800">{caseItem.title}</CardTitle>
+                  <CardDescription className="text-lg text-slate-600">
+                    {caseItem.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-4 mt-6">
+                    {caseItem.metrics.map((metric, metricIndex) => (
+                      <div key={metricIndex} className="text-center">
+                        <div className={`text-3xl font-bold text-${metric.color}-600`}>{metric.value}</div>
+                        <div className="text-sm text-slate-600">{metric.label}</div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="p-8 bg-gradient-to-br from-green-50 to-blue-50 border-0">
-              <CardHeader>
-                <div className="flex items-center space-x-3 mb-4">
-                  <Brain className="w-8 h-8 text-purple-500" />
-                  <Badge className="bg-purple-100 text-purple-800">Inovação</Badge>
-                </div>
-                <CardTitle className="text-2xl text-slate-800">Assistente Virtual com IA</CardTitle>
-                <CardDescription className="text-lg text-slate-600">
-                  Primeiro assistente virtual para direitos do consumidor no terceiro setor brasileiro
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">50K+</div>
-                    <div className="text-sm text-slate-600">Usuários ativos</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600">24/7</div>
-                    <div className="text-sm text-slate-600">Atendimento IA</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
